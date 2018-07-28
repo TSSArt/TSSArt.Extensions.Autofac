@@ -11,17 +11,6 @@ namespace TSSArt.Extensions.Autofac
 
 	public static class AutofacExtensions
 	{
-		public static IRegistrationBuilder<Func<TSelector, TService>, SimpleActivatorData, SingleRegistrationStyle> RegisterRuntimeSelector<TSelector, TService>(this ContainerBuilder builder) where TService : class
-		{
-			if (builder == null) throw new ArgumentNullException(nameof(builder));
-
-			return builder.Register<Func<TSelector, TService>>((ctx, prms) =>
-			{
-				ctx = ctx.Resolve<IComponentContext>();
-				return key => (key != null ? ctx.ResolveOptionalKeyed<TService>(key) : null) ?? ctx.Resolve<TService>();
-			});
-		}
-
 		public static ITypedBuilder TypedDecoration<TService>(this ITypedBuilder builder) => Register(builder, new TypedService(typeof(TService)));
 
 		public static ITypedBuilder NamedDecoration<TService>(this ITypedBuilder builder, string serviceName) => Register(builder, new KeyedService(serviceName, typeof(TService)));
