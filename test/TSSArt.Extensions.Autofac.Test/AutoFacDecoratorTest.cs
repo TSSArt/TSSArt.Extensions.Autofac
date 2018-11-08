@@ -8,7 +8,7 @@ using TSSArt.Extensions.Autofac;
 namespace TSSArt.HowToServer.Test
 {
 	[TestClass]
-	public class AutoFacDecoratorTest
+	public class AutofacDecoratorTest
     {
 	    public interface IDecorated
 	    {

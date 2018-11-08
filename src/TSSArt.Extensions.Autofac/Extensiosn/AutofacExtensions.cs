@@ -29,6 +29,14 @@ namespace TSSArt.Extensions.Autofac
 
 		public static IGenericBuilder KeyedDecoration(this IGenericBuilder builder, object serviceKey, Type serviceType) => Register(builder, new KeyedService(serviceKey, serviceType));
 
+		public static IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> AsStartableWhenActivated<TLimit, TActivatorData, TRegistrationStyle>(this IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> registration) where TLimit : IStartable
+		{
+			if (registration == null) throw new ArgumentNullException(nameof(registration));
+
+			registration.RegistrationData.ActivatedHandlers.Add((s, e) => ((IStartable) e.Instance).Start());
+
+			return registration;
+		}
 
 		private static ITypedBuilder Register(ITypedBuilder builder, IServiceWithType service)
 		{
