@@ -8,8 +8,8 @@ namespace TSSArt.HowToServer.Test
 	[TestClass]
 	public class AutofacStartableTest
 	{
-	    public class SimpleType : IStartable
-	    {
+	    public class SimpleType : IStartWhenActivated
+		{
 		    public bool Started { get; private set; }
 
 		    public void Start()
@@ -18,7 +18,7 @@ namespace TSSArt.HowToServer.Test
 		    }
 	    }
 
-	    public class DisposableType : IStartable, IDisposable
+	    public class DisposableType : IStartWhenActivated, IDisposable
 	    {
 		    public bool Started { get; private set; }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 using TSSArt.Autofac.Decorator;
@@ -29,11 +28,11 @@ namespace TSSArt.Extensions.Autofac
 
 		public static IGenericBuilder KeyedDecoration(this IGenericBuilder builder, object serviceKey, Type serviceType) => Register(builder, new KeyedService(serviceKey, serviceType));
 
-		public static IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> AsStartableWhenActivated<TLimit, TActivatorData, TRegistrationStyle>(this IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> registration) where TLimit : IStartable
+		public static IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> AsStartableWhenActivated<TLimit, TActivatorData, TRegistrationStyle>(this IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> registration) where TLimit : IStartWhenActivated
 		{
 			if (registration == null) throw new ArgumentNullException(nameof(registration));
 
-			registration.RegistrationData.ActivatedHandlers.Add((s, e) => ((IStartable) e.Instance).Start());
+			registration.RegistrationData.ActivatedHandlers.Add((s, e) => ((IStartWhenActivated) e.Instance).Start());
 
 			return registration;
 		}
