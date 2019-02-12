@@ -161,6 +161,8 @@ namespace TSSArt.Autofac.Decorator
 		bool IComponentRegistry.TryGetRegistration(Service service, out IComponentRegistration registration) => _inner.TryGetRegistration(service, out registration);
 		bool IComponentRegistry.IsRegistered(Service service) => _inner.IsRegistered(service);
 		IEnumerable<IComponentRegistration> IComponentRegistry.RegistrationsFor(Service service) => _inner.RegistrationsFor(service);
+		public IEnumerable<IComponentRegistration> DecoratorsFor(IComponentRegistration registration) => _inner.DecoratorsFor(registration);
+
 		IDictionary<string, object> IComponentRegistry.Properties => _inner.Properties;
 		IEnumerable<IComponentRegistration> IComponentRegistry.Registrations => _inner.Registrations;
 		IEnumerable<IRegistrationSource> IComponentRegistry.Sources => _inner.Sources;
